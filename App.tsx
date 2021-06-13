@@ -1,11 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View, Platform } from "react-native";
+
+import Feed from "./src/screens/Feed";
 
 export default function App() {
+  const commentHandler = () => {
+    console.log("CommentHandler pressed");
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Feed style={styles.feed} />
       <StatusBar style="auto" />
     </View>
   );
@@ -14,8 +20,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+  },
+  feed: {
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 0 : 11,
   },
 });
