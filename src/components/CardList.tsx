@@ -1,20 +1,21 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC } from "react";
 import { StyleSheet, FlatList, ListRenderItem } from "react-native";
 
-import { getImageFromId } from "../utils/helper";
 import CardModel from "../models/Card";
 import Card from "./Card";
 
 interface CartListProps {
-  cards: Array<CardModel>;
+  items: Array<CardModel>;
+  onPressComment: (id: number) => void;
 }
 
-const CardList: FC<CartListProps> = ({ cards }) => {
+const CardList: FC<CartListProps> = ({ items, onPressComment }) => {
   const renderCard: ListRenderItem<CardModel> = ({ item }) => (
     <Card
       fullName={item.author}
+      commentCount={item.comments.length}
       image={{ uri: item.imageUri }}
-      onPressComment={() => {}}
+      onPressComment={() => onPressComment(item.id)}
     />
   );
 
@@ -22,7 +23,7 @@ const CardList: FC<CartListProps> = ({ cards }) => {
 
   return (
     <FlatList
-      data={cards}
+      data={items}
       renderItem={renderCard}
       keyExtractor={keyExtractor}
     />

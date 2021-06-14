@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import {
   StyleSheet,
   ActivityIndicator,
@@ -8,41 +8,33 @@ import {
 
 import CardList from "../components/CardList";
 import Card from "../models/Card";
-import { fetchCards } from "../utils/helper";
 
 interface FeedProps {
   style: {};
+  items: Array<Card>;
+  loading: boolean;
+  error: boolean;
+  onPressComment: (id: number) => void;
 }
 
-const Feed: FC<FeedProps> = ({ style }) => {
-  const [feed, setFeed] = useState({ loading: true, error: false });
-  const [items, setItems] = useState<Array<Card>>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const items = await fetchCards();
-        setFeed({ loading: false, error: false });
-        setItems(items);
-      } catch (er) {
-        setFeed({ loading: false, error: true });
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  if (feed.loading) {
+const Feed: FC<FeedProps> = ({
+  style,
+  items,
+  loading,
+  error,
+  onPressComment,
+}) => {
+  if (loading) {
     return <ActivityIndicator size="large" />;
   }
 
-  if (feed.error) {
+  if (error) {
     return <Text>Error...</Text>;
   }
 
   return (
     <SafeAreaView style={style}>
-      <CardList cards={items} />
+      <CardList items={items} onPressComment={onPressComment} />
     </SafeAreaView>
   );
 };

@@ -29,10 +29,10 @@ export const getImageFromId = (id: number): string => {
 export const fetchCards = (): Promise<Array<Card>> => {
     const promise = new Promise<Array<Card>>((resolve, reject) => {
         const cards: Array<Card> = [
-            { id: 1, author: "Aovich Tularus", imageUri: getImageFromId(getRamdomId(1, 25)) },
-            { id: 2, author: "Brayn Jacada", imageUri: getImageFromId(getRamdomId(25, 50)) },
-            { id: 3, author: "Clara Moss", imageUri: getImageFromId(getRamdomId(50, 75)) },
-            { id: 4, author: "Dzehn Ken", imageUri: getImageFromId(getRamdomId(75, 100)) },
+            { id: 1, author: "Aovich Tularus", imageUri: getImageFromId(getRamdomId(1, 25)), comments: ['I like it!'] },
+            { id: 2, author: "Brayn Jacada", imageUri: getImageFromId(getRamdomId(25, 50)), comments: [] },
+            { id: 3, author: "Clara Moss", imageUri: getImageFromId(getRamdomId(50, 75)), comments: [] },
+            { id: 4, author: "Dzehn Ken", imageUri: getImageFromId(getRamdomId(75, 100)), comments: [] },
         ];
         resolve(cards);
     });

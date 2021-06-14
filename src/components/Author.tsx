@@ -6,10 +6,11 @@ import Avatar from "./Avatar";
 
 interface AuthorProps {
   fullName: string;
+  commentText: string;
   onPressComment: () => void;
 }
 
-const Author: FC<AuthorProps> = ({ fullName, onPressComment }) => {
+const Author: FC<AuthorProps> = ({ fullName, commentText, onPressComment }) => {
   return (
     <View style={styles.container}>
       <Avatar
@@ -21,7 +22,7 @@ const Author: FC<AuthorProps> = ({ fullName, onPressComment }) => {
         {fullName}
       </Text>
       <TouchableOpacity onPress={onPressComment}>
-        <Text numberOfLines={1}>Comments</Text>
+        <Text numberOfLines={1}>{commentText}</Text>
       </TouchableOpacity>
     </View>
   );
